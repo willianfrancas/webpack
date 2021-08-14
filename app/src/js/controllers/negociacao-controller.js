@@ -33,25 +33,25 @@ export class NegociacaoController {
         this.atualizaView();
     }
     importaDados() {
-        import('../services/negociacoes-service.js').then(modulo => {
-            const negociacoesService = new modulo.negociacoesService();
-            negociacoesService
-                .obterNegociacoesDoDia()
-                .then(negociacoesDeHoje => {
-                    return negociacoesDeHoje.filter(negociacaoDeHoje => {
-                        return !this.negociacoes
-                            .lista()
-                            .some(negociacao => negociacao
-                                .ehIgual(negociacaoDeHoje));
+        import('../services/negociacoes-service.js')
+            .then(modulo => {
+                const negociacoesService = new modulo.NegociacoesService();
+                negociacoesService.obterNegociacoesDoDia()
+                    .then(negociacoesDeHoje => {
+                        return negociacoesDeHoje.filter(negociacaoDeHoje => {
+                            return !this.negociacoes
+                                .lista()
+                                .some(negociacao => negociacao
+                                    .ehIgual(negociacaoDeHoje));
+                        });
+                    })
+                    .then(negociacoesDeHoje => {
+                        for (let negociacao of negociacoesDeHoje) {
+                            this.negociacoes.adiciona(negociacao);
+                        }
+                        this.negociacoesView.update(this.negociacoes);
                     });
-                })
-                .then(negociacoesDeHoje => {
-                    for (let negociacao of negociacoesDeHoje) {
-                        this.negociacoes.adiciona(negociacao);
-                    }
-                    this.negociacoesView.update(this.negociacoes);
-                });
-        });
+            });
     }
     ehDiaUtil(data) {
         return data.getDay() > DiasDaSemana.DOMINGO
