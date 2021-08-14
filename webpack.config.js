@@ -38,5 +38,9 @@ module.exports = {
         new MiniCssExtractPlugin({
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
-    ]
+    ],
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        port: 3000,
+    }
 };
