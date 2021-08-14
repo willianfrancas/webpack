@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "start": "lite-server --baseDir=app",
-    "build-dev": "webpack --mode development --config webpack.config.js"
+    "build-dev": "webpack --mode development --config webpack.config.js",
+    "build-prod": "webpack --mode production --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",
