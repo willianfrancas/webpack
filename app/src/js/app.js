@@ -1,4 +1,5 @@
 import { NegociacaoController } from './controllers/negociacao-controller.js';
+import 'normalize.css/normalize.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const controller = new NegociacaoController();
